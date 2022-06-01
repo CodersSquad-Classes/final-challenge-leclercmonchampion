@@ -41,11 +41,11 @@ int printMap(int map[22][19]){
                     printf("   ");
                     break;
                 case 1:
-                    printf("\033[0;0m");
+                    printf("\033[0;31m");
                     printf(" . ");
                     break;
                 case 2:
-                    printf("\033[0;31m");
+                    printf("\033[0;34m");
                     if(i > 0) neighbors[0] = map[i-1][j]/2;
                     if(i < 20) neighbors[1] = map[i+1][j]/2;
                     if(j > 0) neighbors[2] = map[i][j-1]/2;
