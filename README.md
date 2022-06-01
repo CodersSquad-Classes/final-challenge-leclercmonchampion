@@ -1,28 +1,25 @@
-Multithreaded Grand Prix Simulator (multi-node)
-===============================================
+Multithreaded Pacman Game - (single-node)
+=========================================
 
-Implement a multithreaded grand prix simulator where every car will be an independent entity. You will be simulating an N laps race. This will be able to run in a multi-node setup.
+Implement a multithreaded version of the arcade video game [Pacman](https://en.wikipedia.org/wiki/Pac-Man). This version will be a
+Computer vs Human game. Each enemy will be independent and the number of enemies is configurable. Below you can see the general
+requirements for the enemies and human player (pacman) interation.
 
-![Grand Prix](grand-prix.png)
-
-
-Multi-node architecture
------------------------
-Your Grand Prix simulator should be able to run on top of `n` number of machines, it's your choice the way you implement it, but it looks a good candidate for a master-server and worker-client(s). Once a race is configured in the server, it will wait a pre-defined time  for the clients to join the race. The clients can be configurable, human or computer based ones. Remember, you are free to design and implement, just make sure it works in a multi-node architecture.
+![Pacman](pacman.png)
 
 
 Technical Requirements
 ----------------------
-- The race's lap can be static or automatically generated.
-- Racers number can be configured on start.
-- Define a random max speed for each car.
-- You will emulate the increasing speed behaviour that any car has.
-- If a car detect another car on his route and it's slower, it must slow down its speed or try to rebase it.
-- Each racer behaviour will be implemented as a separated thread.
-- Cars threads must use the same map or city layout data structure resource.
-- Define how many laps before starting the race.
-- Display each car's speed, position, racing time and lap.
-- At the end, display the top 3 winners.
+- The game's maze layout can be static.
+- The `pacman` gamer must be controlled by the user.
+- Enemies are autonomous entities that will move a random way.
+- Enemies and pacman should respect the layout limits and walls.
+- Enemies number can be configured on game's start.
+- Each enemy's behaviour will be implemented as a separated thread.
+- Enemies and pacman threads must use the same map or game layout data structure resource.
+- Display obtained pacman's scores.
+- Pacman loses when an enemy touches it.
+- Pacman wins the game when it has taken all coins in the map.
 
 
 General Requirements
@@ -37,7 +34,7 @@ Deliverables
 - Architecture Document - [ARCHITECTURE.md](ARCHITECTURE.md)
   - Details on how you designed and implemented your solution
   - Project architecture description, diagrams, charts and everything related to the way you think/design/build your program
-- Build/Run automation (`Makefile` and documentation - [GRAND-PRIX.md](GRAND-PRIX.md))
+- Build/Run automation (`Makefile` and documentation - [PACMAN.md](PACMAN.md))
   - Instructions on how to build and run your program
 - Project's presentation (5-10 minutes)
   - A video presentation that will be delivered to the professor, in youtube preferable
@@ -66,4 +63,4 @@ Grading Policy
 
 - **Free Lab Bonus**
 
-  You can get an extra bonus if you implement an intelligent mechanism to avoid being overrun when a racer tries to pass another racer. It must be documented in the `ARCHITECTURE.md` file.
+  You get cat an extra bonus if you implement an Artificial Intelligence algorithm in enemies behaviour for finding the pacman location, trace the route and follow it. This AI must be documented in the `ARCHITECTURE.md` file.
