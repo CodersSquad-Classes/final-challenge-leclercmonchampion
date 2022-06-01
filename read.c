@@ -4,7 +4,7 @@
 
 
 
-void read_text(char* m[418]){
+void read_text(char m[418]){
 	char ch;
 	FILE *f;
 	f = fopen("maps.txt","r");
@@ -24,7 +24,7 @@ void read_text(char* m[418]){
 	fclose(f);
 }
 
-void print_matrix(char* m[418]){
+void print_matrix(char m[418]){
 	for(size_t i = 0 ; i<22 ; i++){
         for(size_t j = 0 ; j<19 ; j++){
            printf("%c",m[i*19+j]); 
@@ -33,8 +33,8 @@ void print_matrix(char* m[418]){
     }
 }
 
-void read(char* m[418]){
-	read_text(char* m[418]);
-    print_matrix(char* m[418]);
+void read(char m[418]){
+	read_text(char m[418]);
+    print_matrix(char m[418]);
 }
 

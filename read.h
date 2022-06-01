@@ -4,6 +4,6 @@
 
 void read_text(char str[]);
 void print_matrix(char str[]);
-void read(char str[]);
+void read(char [418]);
 
 #endif
