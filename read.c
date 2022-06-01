@@ -27,9 +27,9 @@ void read_text(){
 }
 
 void print_matrix(){
-	for(size_t i = 0 ; i<9 ; i++){
-        for(size_t j = 0 ; j<9 ; j++){
-           printf("%c",m[i*9+j]); 
+	for(size_t i = 0 ; i<22 ; i++){
+        for(size_t j = 0 ; j<19 ; j++){
+           printf("%c",m[i*19+j]); 
         }
         printf("\n");
     }
