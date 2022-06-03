@@ -53,3 +53,9 @@ We define each box with a specific value to define its state :
 - 2 corresponds to a wall
 - 3 corresponds to the pacman
 - 4 corresponds to the ghosts
+
+
+Ghosts :
+--------
+
+
