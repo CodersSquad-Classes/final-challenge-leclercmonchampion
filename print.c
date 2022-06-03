@@ -53,9 +53,10 @@ int printMap(){
                     }
                         
                     break;
-                /*default:
+                default:
                     printf("Error inf matrix format : shouldn't include %c", map[i*19+j]);
-                    break;*/
+                    return 1;
+                    break;
             }
             
         }
