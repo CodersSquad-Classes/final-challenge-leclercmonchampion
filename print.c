@@ -7,8 +7,7 @@ char map[418];
 int printMap(char map[418]);
 
 int main(){
-    read(map);
-    print_matrix(map);
+    read("maps.txt", map);
     printMap(map);
     return 0;
 }

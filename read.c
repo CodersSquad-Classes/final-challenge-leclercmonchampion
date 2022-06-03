@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 
-void read_text(char *filename, char *m[]){
+void read_text(char *filename, char m[]){
 	char ch;
 	FILE *f;
 	f = fopen(filename, "r");
@@ -14,25 +14,28 @@ void read_text(char *filename, char *m[]){
 	int i=0;
 	while((ch=fgetc(f))!=EOF){
 		if((int)ch==48 || (int)ch==49 || (int)ch==50){
-			*m[i]=ch;
+			m[i]=ch;
 			i++;
 		}
 	}
 	fclose(f);
 }
 
-void print_matrix(char *m[]){
+void print_matrix(char m[]){
 	for(size_t i = 0 ; i<22 ; i++){
         for(size_t j = 0 ; j<19 ; j++){
-           printf("%c", *m[i*19+j]); 
+           printf("%c", m[i*19+j]); 
         }
         printf("\n");
     }
 }
 
-char* read(char *filename){
-	char *m[418];
-	read_text(filename, m);
-	print_matrix(m);
-	return *m;
+void read(char *filename, char m[]){
+	read_text("map.txt", m);
 }
+
+/*
+void main(){
+	print_matrix(read("map.txt"));
+}
+*/

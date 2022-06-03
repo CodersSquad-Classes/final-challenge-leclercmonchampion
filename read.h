@@ -2,8 +2,8 @@
 #define READ_H
 
 
-void read_text(char *filename, char *m[]);
-void print_matrix(char *m[]);
-char* read(char *filename);
+void read_text(char *filename, char m[]);
+void print_matrix(char m[]);
+char* read(char *filename, char m[]);
 
 #endif
