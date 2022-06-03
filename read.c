@@ -34,7 +34,6 @@ void print_matrix(char m[418]){
 }
 
 void read(char m[418]){
-	read_text(char m[418]);
-    print_matrix(char m[418]);
+	read_text(char m);
+    print_matrix(char m);
 }
-
