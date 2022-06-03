@@ -22,7 +22,7 @@ void read_text(char *filename, int m[]){
 }
 
 void print_matrix(int m[]){
-	for(size_t i = 0 ; i<22 ; i++){
+	for(size_t i = 0 ; i<21 ; i++){
         for(size_t j = 0 ; j<19 ; j++){
            printf("%c", m[i*19+j]+48); 
         }
