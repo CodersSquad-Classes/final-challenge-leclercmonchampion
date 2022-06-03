@@ -21,10 +21,10 @@ void read_text(char *filename, char *m[]){
 	fclose(f);
 }
 
-void print_matrix(char *m[]){
+void print_matrix(char m[]){
 	for(size_t i = 0 ; i<22 ; i++){
         for(size_t j = 0 ; j<19 ; j++){
-           printf("%c", *m[i*19+j]); 
+           printf("%c", m[i*19+j]); 
         }
         printf("\n");
     }
@@ -32,7 +32,12 @@ void print_matrix(char *m[]){
 
 char* read(char *filename){
 	char *m[418];
-	read_text(filename, m);
-	print_matrix(m);
+	read_text("map.txt", m);
 	return *m;
 }
+
+/*
+void main(){
+	print_matrix(read("map.txt"));
+}
+*/
