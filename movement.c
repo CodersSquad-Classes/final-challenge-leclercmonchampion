@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "conio.h"
+#include "movement.h"
 
 #define true 1
 
@@ -14,13 +15,13 @@ void movement(struct pacman *player){
                     (*player).direction = 'U';//going up
                     break;
                 case 's':
-                    (*player).direction = 'U';//going up
+                    (*player).direction = 'D';//going down
                     break;
                 case 'a':
-                    (*player).direction = 'U';//going up
+                    (*player).direction = 'U';//going right
                     break;
                 case 'd':
-                    (*player).direction = 'U';//going up
+                    (*player).direction = 'U';//going left
                     break;
             }
         }

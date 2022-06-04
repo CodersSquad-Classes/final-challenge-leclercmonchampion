@@ -1,7 +1,8 @@
 {
     "C_Cpp.errorSquiggles": "Enabled",
     "files.associations": {
-        "ncurses.h": "c"
+        "ncurses.h": "c",
+        "movement.h": "c"
     },
     "debug.onTaskErrors": "showErrors"
 }

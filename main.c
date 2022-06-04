@@ -1,31 +1,31 @@
-struct coord
-{
-	int x;
-	int y;
-};
+#include <stdio.h>
+#include <stdlib.h>
+#include "ghosts.h"
+#include <unistd.h>
 
-struct ghost
-{
-	struct coord pos;
-};
 
-struct pacman
+
+
+
+void play(Ghost g)
 {
-	struct coord pos;
-	int lives;
-	char direction;
-};
+	printf("(%d, %d)\n",g.x,g.y);
+	g = move_ghost(g);
+	sleep(1);
+	play(g);
+}
 
 int main()
 {
-	struct pacman player;
+	/*struct pacman player;
 	player.pos.x = 9;
 	player.pos.y = 15;
-	player.lives = 1;
-	player.direction = 'N';//No direction
-	struct ghost orange;
-	orange.pos.x = 9;
-	orange.pos.y = 9;
-	
+	player.lives = 1;*/
+	Ghost orange;
+	orange.x = 9;
+	orange.y = 9;
+	//orange = move_ghost(orange);
+	play(orange);
+	return 0;
 }
 
