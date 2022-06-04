@@ -9,6 +9,7 @@ Project Architecture :
 ----------------------
 
 We decided to split the project into several code files in order to have a better vision of the project in its entirety as well as to have a better organization.
+We put all the supporting scripts in the src folder and left main.c in the global folder. As well as images and documentation in the Documentation folder.
 
 ### Scripts
 - main.c : This script is the center of our program. It links the different scripts and functions together in order to have a functional program. It also defines the basic structures and parameters of our ghosts and our pacman. It also allows to edit the matrix that manages our map.
