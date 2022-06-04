@@ -1,9 +1,33 @@
 ARCHITECTURE - Documentation
 ======================
 
-This document will allow you to understand the developement and the decisions we made for this project.
+This document will allow you to understand the developement and the decisions we made for this project, as well as the architecture of the project. 
 
 
+
+Project Architecture :
+----------------------
+
+We decided to split the project into several code files in order to have a better vision of the project in its entirety as well as to have a better organization.
+
+### Scripts
+- main.c : This script is the center of our program. It links the different scripts and functions together in order to have a functional program. It also defines the basic structures and parameters of our ghosts and our pacman. It also allows to edit the matrix that manages our map.
+- movement.c : Allows to manage the movements of the Pacman, to recover the keys typed by the user in order to transcribe them in the game to direct the character.
+- ghost.c : Allows you to define the structure of ghosts. This also governs their random movement.
+- read.c : This script makes it possible to recover data from map.txt and transcribe them into a matrix which will then be used throughout the project.
+- print.c : This script displays the map and the score of the game from the matrix.
+
+### Documentation
+- img : Folder that groups the photos used.
+- ARCHITECTURE.md : Documentation which allows to understand the architecture of the code as well as the development of our project.
+- PACMAN.md : Documentation that helps to understand how to build and run our project.
+
+### Maps
+- maps.txt : Corresponds to the different maps of our game.
+
+### External scripts
+- conio.h 
+- conio.c : Use to import the conio library which is normally reserved for windows users. This library makes it possible to detect the pressure of the keys to manage the movements.
 
 Graphic Interface :
 -------------------
