@@ -50,4 +50,13 @@ We define each box with a specific value to define its state :
 - 0 corresponds to a box already eaten
 - 1 corresponds to a box not yet eaten
 - 2 corresponds to a wall
+- 3 corresponds to the Pacman
+- 4 corresponds to the ghosts
 
+
+
+Ghosts
+------
+
+Regarding how ghosts work, we decided to make them follow a random path. 
+On each tick they will move in a random direction and wait for the next tick. Obviously, they cannot cross the walls and removes a life from the Pacman if they cross paths.
