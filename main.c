@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "ghosts.h"
-#include "movement.h"
-#include "print.h"
-#include "read.h"
+#include "src/ghosts.h"
+#include "src/movement.h"
+#include "src/print.h"
+#include "src/read.h"
 #include <unistd.h>
 
 int score = 0;
