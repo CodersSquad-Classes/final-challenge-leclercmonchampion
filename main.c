@@ -24,7 +24,7 @@ int main()
 	player.lives = 1;*/
 	int map[390];
 
-	read("maps.txt", map);
+	read("src/maps.txt", map);
 
 	printMap(map, score);
 
