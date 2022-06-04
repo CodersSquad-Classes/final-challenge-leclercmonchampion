@@ -30,7 +30,7 @@ void print_matrix(int m[]){
     }
 }
 
-void read(char *filename, int m[]){
+void readBis(char *filename, int m[]){
 	read_text("maps.txt", m);
 	print_matrix(m);
 }

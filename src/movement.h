@@ -7,13 +7,13 @@ struct coord
 	int y;
 };
 
-struct pacman
+typedef struct Pacman
 {
 	struct coord pos;
 	int lives;
 	char direction;
-};
+}Pacman;
 
-void movement(struct pacman *pacman, char direction);
+void movement(Pacman *pacman);
 
 #endif

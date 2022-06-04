@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "read.h"
 
 //needs read.c to read maps.txt files to be have multiple maps
 
@@ -45,9 +44,8 @@ void printMap(int map[], int score){
                         
                     break;
                 default:
-                    printf("Error inf matrix format : shouldn't include %c", map[i*19+j]);
+                    printf("Error inf matrix format : shouldn't include %c\n", map[i*19+j]);
                     return 1;
-                    break;
             }
             
         }

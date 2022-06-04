@@ -6,7 +6,7 @@
 
 #define true 1
 
-void movement(struct pacman *player){
+void movement(Pacman *player){
     while(true){
         if(!c_kbhit()){
             char c = c_getch();
