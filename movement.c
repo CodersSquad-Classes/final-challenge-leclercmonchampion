@@ -1,27 +1,31 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <ncurses.h>
+#include "conio.h"
 
-#define WIDTH 30
-#define HEIGHT 10 
+#define true 1
 
-int _kbhit();
-
-int main(){
-    WINDOW *menu_win;
-    char c ;
-
-    cbreak();
-    int startx = (80 - WIDTH) / 2;
-	int starty = (24 - HEIGHT) / 2;
-
-    menu_win = newwin(HEIGHT, WIDTH, starty, startx);	
-
-    while(1)
-	{	c = wgetch(menu_win);
-		printf("%d\n", c);
-	}	
-    return 1;
+void movement(struct pacman *player){
+    while(true){
+        if(!c_kbhit()){
+            char c = c_getch();
+            switch(c){
+                case 'w':
+                    (*player).direction = 'U';//going up
+                    break;
+                case 's':
+                    (*player).direction = 'U';//going up
+                    break;
+                case 'a':
+                    (*player).direction = 'U';//going up
+                    break;
+                case 'd':
+                    (*player).direction = 'U';//going up
+                    break;
+            }
+        }
+    }
 }
+
+
 
