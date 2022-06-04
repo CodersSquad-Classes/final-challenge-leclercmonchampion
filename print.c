@@ -2,17 +2,8 @@
 #include "read.h"
 
 //needs read.c to read maps.txt files to be have multiple maps
-int map[399];
 
-int printMap();
-
-int main(){
-    read("maps.txt", map);
-    printMap();
-    return 0;
-}
-
-int printMap(){
+void printMap(int map[], int score){
     int i,j;
     for(i=0;i<21;i++){
         for(j=0;j<19;j++){
@@ -61,7 +52,6 @@ int printMap(){
             
         }
         printf("\n");
-        
     }
-    return 0;
+    printf("Score : %d\n", score);
 }
