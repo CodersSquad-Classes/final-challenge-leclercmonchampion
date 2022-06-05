@@ -1,4 +1,4 @@
-<font color='darkorange'> Multithreaded Pacman Game - (single-node) </font>
+Multithreaded Pacman Game - (single-node)
 =========================================
 
 Implement a multithreaded version of the arcade video game [Pacman](https://en.wikipedia.org/wiki/Pac-Man). This version will be a
