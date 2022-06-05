@@ -5,9 +5,10 @@ typedef struct ghost
 {
 	int x;
 	int y;
-	char color;
+	int prev_x;
+	int prev_y;
 	int valueLoc;
 }Ghost;
-Ghost move_ghost(Ghost g);
+void move_ghost(Ghost *g, int *printed);
 
 #endif

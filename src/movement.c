@@ -4,27 +4,27 @@
 #include "conio.h"
 #include "movement.h"
 
-#define true 1
-
-void movement(Pacman *player){
-    while(true){
+void movement(Pacman *player, int *printed){
+    while(player->lives != 0){
+        if(!*printed) continue;
         if(!c_kbhit()){
             char c = c_getch();
             switch(c){
                 case 'w':
-                    (*player).direction = 'U';//going up
+                    player->direction = 'v';//going up
                     break;
                 case 's':
-                    (*player).direction = 'D';//going down
+                    player->direction = '^';//going down
                     break;
                 case 'a':
-                    (*player).direction = 'U';//going right
+                    player->direction = '<';//going right
                     break;
                 case 'd':
-                    (*player).direction = 'U';//going left
+                    player->direction = '>';//going left
                     break;
             }
         }
+        sleep(1);
     }
 }
 
