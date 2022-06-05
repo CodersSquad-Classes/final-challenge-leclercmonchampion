@@ -3,7 +3,8 @@
     "files.associations": {
         "ncurses.h": "c",
         "movement.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "unistd.h": "c"
     },
     "debug.onTaskErrors": "showErrors"
 }

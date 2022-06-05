@@ -1,9 +1,13 @@
 #include <stdio.h>
+#include "conio.h"
+#include "movement.h"
+#include "ghosts.h"
 
 //needs read.c to read maps.txt files to be have multiple maps
 
-void printMap(int map[], int score){
+void printMap(int map[], int score, Pacman player, Ghost ghosts[]){
     int i,j;
+    printf("\033[2J\033[1;1H");
     for(i=0;i<21;i++){
         for(j=0;j<19;j++){
             int neighbors[4] = {0,0,0,0};
@@ -13,11 +17,11 @@ void printMap(int map[], int score){
                     printf("   ");
                     break;
                 case 1:
-                    printf("\033[0;31m");
+                    printf("\x1b[31;1m");
                     printf(" . ");
                     break;
                 case 2:
-                    printf("\033[0;34m");
+                    printf("\x1b[34m");
                     if(i > 0) neighbors[0] = map[(i-1)*19+j];
                     if(i < 20) neighbors[1] = map[(i+1)*19+j];
                     if(j > 0) neighbors[2] = map[i*19+j-1];
@@ -43,9 +47,29 @@ void printMap(int map[], int score){
                     }
                         
                     break;
+                case 3:
+                    printf("\x1b[33;1m");
+                    printf(" %c ", player.direction);
+                    break;
+                case 4: //clyde
+                    c_textcolor(12); //Light red
+                    printf(" %c ", 'n');
+                    break;
+                case 5: //pinky
+                    c_textcolor(12); //light magenta
+                    printf(" %c ", 'n');
+                    break;
+                case 6: //blinky
+                    c_textcolor(12); //light yellow
+                    printf(" %c ", 'n');
+                    break;
+                case 7: //inky
+                    c_textcolor(12); //light cyan
+                    printf(" %c ", 'n');
+                    break;
                 default:
                     printf("Error inf matrix format : shouldn't include %c\n", map[i*19+j]);
-                    return 1;
+                    return;
             }
             
         }

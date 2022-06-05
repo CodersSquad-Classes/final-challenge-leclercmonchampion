@@ -14,6 +14,6 @@ typedef struct Pacman
 	char direction;
 }Pacman;
 
-void movement(Pacman *pacman);
+void movement(Pacman *pacman, int *printed);
 
 #endif
