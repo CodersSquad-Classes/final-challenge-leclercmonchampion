@@ -67,7 +67,7 @@ In order to have a better representation of the map and the game for the user, w
 &nbsp;{2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2},  
 &nbsp;{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}}
 
-![Excelmap](img/excelmap.png) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ![Pacman](img/pacman.png) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+![Excelmap](img/excelmap.png) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ![Pacman](img/pacman.png) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 
 Regarding the management of the map, we decided to represent it in the form of a matrix, as can be seen in the images above.
 We define each box with a specific value to define its state : 
