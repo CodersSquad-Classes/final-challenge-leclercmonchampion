@@ -1,4 +1,4 @@
-
+// this script was imported and not made by us 
 
 #ifdef _WIN32
 
