@@ -1,50 +1,49 @@
-ARCHITECTURE - Documentation
+<font color='darkorange'> ARCHITECTURE - Documentation </font>
 ======================
 
 This document will allow you to understand the developement and the decisions we made for this project, as well as the architecture of the project. 
 
 
 
-Project Architecture :
+<font color='greenyellow'> Project Architecture : </font>
 ----------------------
 
 We decided to split the project into several code files in order to have a better vision of the project in its entirety as well as to have a better organization.
 We put all the supporting scripts in the src folder and left main.c in the global folder. As well as images and documentation in the Documentation folder.
 
-### Scripts
+### <font color='aqua'> Scripts </font>
 - main.c : This script is the center of our program. It links the different scripts and functions together in order to have a functional program. It also defines the basic structures and parameters of our ghosts and our pacman. It also allows to edit the matrix that manages our map.
 - movement.c : Allows to manage the movements of the Pacman, to recover the keys typed by the user in order to transcribe them in the game to direct the character.
 - ghost.c : Allows you to define the structure of ghosts. This also governs their random movement.
 - read.c : This script makes it possible to recover data from map.txt and transcribe them into a matrix which will then be used throughout the project.
 - print.c : This script displays the map and the score of the game from the matrix.
 
-### Documentation
+### <font color='aqua'> Documentation </font>
 - img : Folder that groups the photos used.
 - ARCHITECTURE.md : Documentation which allows to understand the architecture of the code as well as the development of our project.
 - PACMAN.md : Documentation that helps to understand how to build and run our project.
 
-### Maps
+### <font color='aqua'> Maps </font>
 - maps.txt : Corresponds to the different maps of our game.
 
-### External scripts
+### <font color='aqua'> External scripts </font>
 - conio.h 
 - conio.c : Use to import the conio library which is normally reserved for windows users. This library makes it possible to detect the pressure of the keys to manage the movements.
 
-Graphic Interface :
+<font color='greenyellow'> Graphic Interface : </font>
 -------------------
 
 For the graphical interface we just plan to use the console and create an ASCII graphical interface.
 In order to have a better representation of the map and the game for the user, we will use a color system to differentiate the walls, the Pacman, the ghosts and the points.
-- The Pacman will be represented with the following characters : **<** *(going to the right)*    **>** *(going to the left)*    **v** *(going up)*     **^** *(going down)* and will be in yellow.
-- The ghosts will be represented with the following character : n   and will be in different color (not yellow)
+- The Pacman will be represented with the following characters : <font color='yellow'> < </font> *(going to the right)*    <font color='yellow'> > </font> *(going to the left)*   <font color='yellow'> v </font> *(going up)*     <font color='yellow'> ^ </font> *(going down)* and will be in yellow.
+- The ghosts will be represented with the following character : <font color='purple'> n </font>   and will be in different color (not yellow)
 - The walls will be represented ...
-- The points will be represented ... 
+- The points will be represented by classic points : <font color='yellow'> . </font>
 
 
 
-Map Management :
+<font color='greenyellow'> Map Management : </font>
 ----------------
-  
   
 {{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},  
 &nbsp;{2,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2},  
@@ -79,10 +78,23 @@ We define each box with a specific value to define its state :
 - 3 corresponds to the Pacman
 - 4 corresponds to the ghosts
 
-
-
-Ghosts
+ <font color='greenyellow'> Ghosts </font>
 ------
 
 Regarding how ghosts work, we decided to make them follow a random path. 
 On each tick they will move in a random direction and wait for the next tick. Obviously, they cannot cross the walls and removes a life from the Pacman if they cross paths.
+
+
+
+Test | Patate
+-----|-------
+Mouche | Petite mouche
+
+```c
+printf("je suis une mouche");
+int pierre = 0;
+```
+
+Titre   
+:Element 1     
+:Element 2     
