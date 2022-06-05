@@ -3,8 +3,6 @@
 
 This document will allow you to understand the developement and the decisions we made for this project, as well as the architecture of the project. 
 
-
-
 <font color='greenyellow'> Project Architecture : </font>
 ----------------------
 
@@ -94,7 +92,3 @@ Mouche | Petite mouche
 printf("je suis une mouche");
 int pierre = 0;
 ```
-
-Titre   
-:Element 1     
-:Element 2     
