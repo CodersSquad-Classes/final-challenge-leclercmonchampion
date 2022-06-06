@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include "omp.h"
+#include "src/struct.h"
 
 int map[390];
 int score = 0;

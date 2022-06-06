@@ -2,6 +2,7 @@
 #include "conio.h"
 #include "movement.h"
 #include "ghosts.h"
+#include "struct.h"
 
 //needs read.c to read maps.txt files to be have multiple maps
 

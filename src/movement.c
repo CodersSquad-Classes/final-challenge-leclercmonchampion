@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "conio.h"
 #include "movement.h"
+#include "struct.h"
 
 void movement(Pacman *player, int *printed){
     while(player->lives != 0){

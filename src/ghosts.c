@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "struct.h"
 
 void move_ghost(Ghost *g, int *printed)
 {
