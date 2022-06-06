@@ -24,7 +24,7 @@ typedef struct Ghost
 typedef struct Game{
     Pacman pac;
     Ghost *ghosts;
-
+	int *map;
 }Game
 
 #endif

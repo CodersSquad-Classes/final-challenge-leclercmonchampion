@@ -4,10 +4,11 @@
 #include "src/movement.h"
 #include "src/print.h"
 #include "src/read.h"
+#include "src/struct.h"
 #include <unistd.h>
 #include <pthread.h>
 #include "omp.h"
-#include "src/struct.h"
+
 
 int map[390];
 int score = 0;
