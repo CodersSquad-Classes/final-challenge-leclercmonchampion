@@ -1,6 +1,6 @@
 // this script was imported and not made by us 
 
-#ifdef _WIN32
+#ifdef _WIN64
 
 #include <windows.h>
 #include <conio.h>
