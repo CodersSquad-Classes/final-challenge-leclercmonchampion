@@ -29,24 +29,24 @@ void play(Game game)
 				printed = 0;
 				for(int i = 0; i<4; i++){
 					printf("aled\n");
-					if(map[ghosts[i].y*19+ghosts[i].x] == 2){
-						ghosts[i].x = ghosts[i].prev_x;
-						ghosts[i].y = ghosts[i].prev_y;
+					if(map[ghosts[i].pos.y*19+ghosts[i].pos.x] == 2){
+						ghosts[i].pos.x = ghosts[i].prev.x;
+						ghosts[i].pos.y = ghosts[i].prev.y;
 					}
-					else if(ghosts[i].x == player.pos.x && ghosts[i].y == player.pos.y){
+					else if(ghosts[i].pos.x == player.pos.x && ghosts[i].pos.y == player.pos.y){
 						player.lives--;
 						player.pos.x = 9;
 						player.pos.y = 15;
 					}
-					else if(ghosts[i].y > 19){
-						ghosts[i].y = 0;	
+					else if(ghosts[i].pos.y > 19){
+						ghosts[i].pos.y = 0;	
 					}
-					else if (ghosts[i].y < 0){
-						ghosts[i].y = 18;
+					else if (ghosts[i].pos.y < 0){
+						ghosts[i].pos.y = 18;
 					}
-					map[ghosts[i].prev_y*19+ghosts[i].prev_x] = ghosts[i].valueLoc;
-					ghosts[i].valueLoc = map[ghosts[i].y*19+ghosts[i].x];
-					map[ghosts[i].y*19+ghosts[i].x] = i+4;
+					map[ghosts[i].prev.y*19+ghosts[i].prev.x] = ghosts[i].valueLoc;
+					ghosts[i].valueLoc = map[ghosts[i].pos.y*19+ghosts[i].pos.x];
+					map[ghosts[i].pos.y*19+ghosts[i].pos.x] = i+4;
 				}
 				if(map[player.pos.y*19+player.pos.x] == 2){
 					switch (player.direction)
@@ -99,20 +99,20 @@ int main()
 
 	Ghost clyde, pinky, blinky, inky;
 
-	clyde.x = 9;
-	clyde.y = 8;
+	clyde.pos.x = 9;
+	clyde.pos.y = 8;
 	clyde.valueLoc = 0;
 	
-	pinky.x = 9;
-	pinky.y = 9;
+	pinky.pos.x = 9;
+	pinky.pos.y = 9;
 	pinky.valueLoc = 0;
 
-	blinky.x = 9;
-	blinky.y = 10;
+	blinky.pos.x = 9;
+	blinky.pos.y = 10;
 	blinky.valueLoc = 0;
 
-	inky.x = 11;
-	inky.y = 9;
+	inky.pos.x = 11;
+	inky.pos.y = 9;
 	inky.valueLoc = 0;
 
 	ghosts[0] = clyde;
