@@ -14,11 +14,13 @@ int map[390];
 int score = 0;
 int printed = 0;
 
-void play(Ghost ghosts[], Pacman player)
+void play(Game game)
 {
 	omp_set_num_threads(6);
 	#pragma omp parallel
 	{
+		Ghost *ghosts = game.ghosts;
+		Pacman player = game.pac;
 		int id = omp_get_thread_num();
 		if(id == 4) movement(&player, &printed);
 		else if (id < 4 )move_ghost(&ghosts[id], &printed);
@@ -119,7 +121,10 @@ int main()
 	ghosts[3] = inky;
 
 	//Start the game
-	play(ghosts, player);
+
+	Game game = {player, ghosts, map};
+
+	play(game);
 	return 0;
 }
 

@@ -1,5 +1,5 @@
-#ifndef GHOSTS_H
-#define GHOSTS_H
+#ifndef STRUCT_H
+#define STRUCT_H
 
 struct coord
 {
