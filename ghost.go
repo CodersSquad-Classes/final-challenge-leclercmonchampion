@@ -1,8 +1,11 @@
 package main
 
-import "math/rand"
+import (
+	"math/rand"
+	"time"
+)
 
-var maps []string
+var maps []int
 
 type pos struct {
 	x int
@@ -15,6 +18,7 @@ func moveGhosts() {
 	for _, g := range ghosts {
 		direction := findDirection()
 		g.x, g.y = Move(g.x, g.y, direction)
+		time.Sleep(800 * time.Millisecond)
 	}
 }
 
@@ -45,17 +49,17 @@ func Move(oldRow, oldCol int, dir string) (newRow, newCol int) {
 		}
 	case "RIGHT":
 		newCol = newCol + 1
-		if newCol == len(maps[0]) {
+		if newCol == 19 {
 			newCol = 0
 		}
 	case "LEFT":
 		newCol = newCol - 1
 		if newCol < 0 {
-			newCol = len(maps[0]) - 1
+			newCol = 19 - 1
 		}
 	}
 
-	if maps[newRow][newCol] == '2' {
+	if maps[newRow*19+newCol] == '2' {
 		newRow = oldRow
 		newCol = oldCol
 	}
