@@ -24,13 +24,18 @@ type Game struct {
 }
 
 func printMap(g *Game) {
-	player Pacman := g.pac
-	map_ []int := g.maps
+
+	var player Pacman
+	var maps []int
+	var neighbors [4]int 
+
+	player := g.pac
+	maps := g.maps
 
 	fmt.Prinln("\033[2J\033[1;1H")
 	for i := 0; i < 21; i++ {
 		for j := 0; j < 19; j++ {
-			neighbor[4] int := {0,0,0,0}
+			neighbor := [4]int{0,0,0,0}
 			switch (map_[i*19+j]) {
 			case 0:
 				fmt.Print("   ")
@@ -55,24 +60,19 @@ func printMap(g *Game) {
 				if neighbor[0] == 2{
 					if neighbor[2] == 2 || neighbor[3] == 2 {
 						fmt.Print(" + ")
-					}
-					else{
+					} else {
 						fmt.Printf(" | ")
 					}
-				}
-				else if neighbor[1] == 2{
+				} else if neighbor[1] == 2 {
 					if neighbor[2] == 2 || neighbor[3] == 2 {
 						fmt.Print(" + ")
-					}
-					else{
+					} else {
 						fmt.Print(" | ")
 					}
-				
-				else{
+				} else {
 					if j==0 || j==18 {
 						fmt.Print(" + ")
-					}
-					else{
+					} else {
 						fmt.Print("---")
 					}
 				}
@@ -95,5 +95,4 @@ func printMap(g *Game) {
 	fmt.Print("\n")
 	}
 	fmt.Print(game.score)
-	return
 }
