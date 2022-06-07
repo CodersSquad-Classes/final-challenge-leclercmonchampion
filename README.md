@@ -5,7 +5,7 @@ Implement a multithreaded version of the arcade video game [Pacman](https://en.w
 Computer vs Human game. Each enemy will be independent and the number of enemies is configurable. Below you can see the general
 requirements for the enemies and human player (pacman) interation.
 
-![Pacman](pacman.png)
+![Pacman](Documentation/img/pacman.png)
 
 
 Technical Requirements

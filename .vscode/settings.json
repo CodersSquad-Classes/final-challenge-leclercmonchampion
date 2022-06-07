@@ -2,7 +2,10 @@
     "C_Cpp.errorSquiggles": "Enabled",
     "files.associations": {
         "ncurses.h": "c",
-        "movement.h": "c"
+        "movement.h": "c",
+        "stdio.h": "c",
+        "unistd.h": "c",
+        "pthread.h": "c"
     },
     "debug.onTaskErrors": "showErrors"
 }
