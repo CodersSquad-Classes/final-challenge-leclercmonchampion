@@ -29,8 +29,8 @@ func printMap(g *Game) {
 	var maps []int
 	var neighbor [4]int 
 
-	game.score := 0
-
+	g.score = 0
+	
 	player := g.pac
 	maps := g.maps
 
