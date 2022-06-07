@@ -4,12 +4,6 @@ import (
 	"os"
 )
 
-type pacman struct {
-	x, y  int
-	lives int
-	dir   string
-}
-
 func readInput() (string, error) {
 	buffer := make([]byte, 100)
 
@@ -38,7 +32,7 @@ func readInput() (string, error) {
 	return "", nil
 }
 
-func makeMove(player *pacman, map_ []int) {
+func makeMove(player *Pacman, map_ []int) {
 
 	switch player.dir {
 	case "v":
