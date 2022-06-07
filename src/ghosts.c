@@ -10,22 +10,22 @@ void move_ghost(Ghost *g, int *printed)
 		if(!*printed) continue;
 		int mov = rand() %2;
 		int direction = rand()%2;
-		g->prev_x = g->x;
-		g->prev_y = g->y;
+		g->prev.x = g->pos.x;
+		g->prev.y = g->pos.y;
 
 		switch (direction)
 		{
 			case 0:
 				if (mov)
-					g->x +=1;
+					g->pos.x +=1;
 				else
-					g->x -=1;
+					g->pos.x -=1;
 				break;
 			case 1:
 				if (mov)
-					g->y +=1;
+					g->pos.y +=1;
 				else
-					g->y -=1;
+					g->pos.y -=1;
 				break;
 		}
 		
