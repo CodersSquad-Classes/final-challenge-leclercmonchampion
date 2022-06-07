@@ -4,26 +4,10 @@ import (
 	"fmt"
 )
 
-type Pacman struct {
-	pos_x, pos_y int
-	lives        int
-	direction    string
-}
-
-type Coordinate struct {
-	x, y int
-}
-
-type Game struct {
-	pac   Pacman
-	maps  []int
-	score int
-}
-
 func printMap(g *Game) {
 
 	var player Pacman
-	var map_ []int
+	var map_ [399]int
 	var neighbor [4]int
 
 	score := g.score
@@ -34,6 +18,7 @@ func printMap(g *Game) {
 	map_ = g.maps
 
 	fmt.Println("\033[2J\033[1;1H")
+	fmt.Print("b")
 	for i := 0; i < 21; i++ {
 		for j := 0; j < 19; j++ {
 			neighbor = [4]int{0, 0, 0, 0}
@@ -79,7 +64,7 @@ func printMap(g *Game) {
 				}
 			case 3:
 				fmt.Print("\x1b[33;1m")
-				fmt.Print(player.direction)
+				fmt.Print(player.dir)
 			case 4:
 				fmt.Print("n")
 			case 5:
