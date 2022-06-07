@@ -32,7 +32,13 @@ func readInput() (string, error) {
 	return "", nil
 }
 
-func makeMove(player *Pacman, map_ []int) {
+func makeMove(game *Game) {
+
+	var player *Pacman
+	var map_ [399]int
+
+	player = &game.pac
+	map_ = game.maps
 
 	switch player.dir {
 	case "v":

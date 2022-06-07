@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type Pacman struct {
 	x, y  int
 	lives int
@@ -25,4 +27,16 @@ func main() {
 	}
 
 	printMap(&game)
+	fmt.Print("b")
+
+	movements := make(chan string)
+	go func(ch chan<- string) {
+		fmt.Print("c")
+		for {
+			fmt.Print("a")
+			readInput()
+			makeMove(&game)
+		}
+	}(movements)
+
 }
