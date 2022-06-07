@@ -73,6 +73,16 @@ func main() {
 		for {
 			moveGhosts(&game)
 			time.Sleep(time.Second)
+			// check if position of pacman is the same as a ghost
+			for _, ghost := range game.ghosts {
+				if ghost.x == game.pac.x && ghost.y == game.pac.y {
+					game.pac.lives--
+					if game.pac.lives == 0 {
+						os.Exit(0)
+						//cas de fin de partie et de mort de pacman
+					}
+				}
+			}
 		}
 	}()
 
