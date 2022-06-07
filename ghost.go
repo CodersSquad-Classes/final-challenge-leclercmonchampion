@@ -12,9 +12,10 @@ type ghost struct {
 }
 
 func moveGhosts() {
-	for _, g := range Game.ghosts {
+	var game Game
+	for _, g := range game.ghosts {
 		direction := findDirection()
-		g.x, g.y = Move(g.x, g.y, direction, *g)
+		g.x, g.y = Move(g.x, g.y, direction, *g, game)
 		time.Sleep(800 * time.Millisecond)
 	}
 }
@@ -30,18 +31,18 @@ func findDirection() string {
 	return move[dir]
 }
 
-func Move(oldRow, oldCol int, dir string, g ghost) (newRow, newCol int) {
+func Move(oldRow, oldCol int, dir string, g ghost, game Game) (newRow, newCol int) {
 
 	newRow, newCol = oldRow, oldCol
 	switch dir {
 	case "UP":
 		newRow = newRow - 1
 		if newRow < 0 {
-			newRow = len(Game.maps) - 1
+			newRow = len(game.maps) - 1
 		}
 	case "DOWN":
 		newRow = newRow + 1
-		if newRow == len(Game.maps) {
+		if newRow == len(game.maps) {
 			newRow = 0
 		}
 	case "RIGHT":
@@ -56,13 +57,13 @@ func Move(oldRow, oldCol int, dir string, g ghost) (newRow, newCol int) {
 		}
 	}
 
-	if Game.maps[newRow*19+newCol] == '2' {
+	if game.maps[newRow*19+newCol] == '2' {
 		newRow = oldRow
 		newCol = oldCol
 	}
 
-	Game.maps[oldRow*19+oldCol] = g.past
-	g.past = Game.maps[newRow*19+newCol]
+	game.maps[oldRow*19+oldCol] = g.past
+	g.past = game.maps[newRow*19+newCol]
 
 	return
 }
