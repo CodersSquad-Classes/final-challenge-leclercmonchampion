@@ -1,6 +1,3 @@
-#ifndef STRUCT_H
-#define STRUCT_H
-
 struct coord
 {
 	int x;
@@ -29,4 +26,6 @@ typedef struct Game{
 	int printed;
 }Game;
 
-#endif
+void aled(){
+    return;
+}

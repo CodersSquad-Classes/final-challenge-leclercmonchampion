@@ -1,5 +1,6 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -fopenmp
+CFLAGS=-Wall -Werror -Wextra -fopenmp
+INC_DIR= src
 
 all:
 	$(CC) $(CFLAGS) src/*.c main.c -o pacman.exe

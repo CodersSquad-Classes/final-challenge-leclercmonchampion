@@ -4,15 +4,14 @@
 #include "src/movement.h"
 #include "src/print.h"
 #include "src/read.h"
-#include "src/struct.h"
 #include <unistd.h>
 #include <pthread.h>
 #include "omp.h"
+#include "main.h"
 
 
 int map[390];
-int score = 0;
-int printed = 0;
+
 
 void play(Game game)
 {
@@ -22,58 +21,16 @@ void play(Game game)
 		Ghost *ghosts = game.ghosts;
 		Pacman player = game.pac;
 		int id = omp_get_thread_num();
-		if(id == 4) movement(&player, &printed);
-		else if (id < 4 )move_ghost(&ghosts[id], &printed);
+		if(id == 4) movement(&game);
+		else if (id < 4 )move_ghost(&game);
 		else{
 			while(player.lives!=0){
-				printed = 0;
-				for(int i = 0; i<4; i++){
-					printf("aled\n");
-					if(map[ghosts[i].pos.y*19+ghosts[i].pos.x] == 2){
-						ghosts[i].pos.x = ghosts[i].prev.x;
-						ghosts[i].pos.y = ghosts[i].prev.y;
-					}
-					else if(ghosts[i].pos.x == player.pos.x && ghosts[i].pos.y == player.pos.y){
-						player.lives--;
-						player.pos.x = 9;
-						player.pos.y = 15;
-					}
-					else if(ghosts[i].pos.y > 19){
-						ghosts[i].pos.y = 0;	
-					}
-					else if (ghosts[i].pos.y < 0){
-						ghosts[i].pos.y = 18;
-					}
-					map[ghosts[i].prev.y*19+ghosts[i].prev.x] = ghosts[i].valueLoc;
-					ghosts[i].valueLoc = map[ghosts[i].pos.y*19+ghosts[i].pos.x];
-					map[ghosts[i].pos.y*19+ghosts[i].pos.x] = i+4;
-				}
-				if(map[player.pos.y*19+player.pos.x] == 2){
-					switch (player.direction)
-					{
-					case 'v': //Going up
-						player.pos.x -= 1;
-						break;
-					case 'D': //Going down
-						player.pos.x += 1;
-						break;
-					case '>': //Going left
-						player.pos.y -= 1;
-						break;
-					case '<': //Going right
-						player.pos.y += 1;
-						break;
-					}
-				}
-				else{
-					score += map[player.pos.y*19+player.pos.x]*10;
-				}
-				map[player.pos.y*19+player.pos.x] = 3;
+				game.printed = 0;
 
-				printMap(map, score, player, ghosts);
+				printMap(&game);
 
 				sleep(1);
-				printed = 1;
+				game.printed = 1;
 			}
 		}
 	}
@@ -122,7 +79,7 @@ int main()
 
 	//Start the game
 
-	Game game = {player, ghosts, map};
+	Game game = {player, ghosts, map,0,0};
 
 	play(game);
 	return 0;

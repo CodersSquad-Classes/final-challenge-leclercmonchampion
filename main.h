@@ -1,5 +1,5 @@
-#ifndef STRUCT_H
-#define STRUCT_H
+#ifndef MAIN_H
+#define MAIN_H
 
 struct coord
 {
@@ -28,5 +28,12 @@ typedef struct Game{
 	int score;
 	int printed;
 }Game;
+
+
+int map[390];
+void play(Game game);
+int main();
+
+
 
 #endif

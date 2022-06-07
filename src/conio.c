@@ -545,9 +545,4 @@ void c_gettextinfo(struct text_info *r)
 
 }
 
-void c_textattr(int newattr)
-{
-  //tODO
-}
-
 #endif //linux

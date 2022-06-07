@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include "conio.h"
-#include "movement.h"
-#include "ghosts.h"
 #include "struct.h"
 
 //needs read.c to read maps.txt files to be have multiple maps
 
-void printMap(int map[], int score, Pacman player, Ghost ghosts[]){
+void printMap(Game *game){
     int i,j;
+    Pacman player = game->pac;
+    int map[] = game->map;
     printf("\033[2J\033[1;1H");
     for(i=0;i<21;i++){
         for(j=0;j<19;j++){
@@ -76,5 +76,5 @@ void printMap(int map[], int score, Pacman player, Ghost ghosts[]){
         }
         printf("\n");
     }
-    printf("Score : %d\n", score);
+    printf("Score : %d\n", game->score);
 }

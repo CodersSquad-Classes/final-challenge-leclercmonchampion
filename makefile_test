@@ -1,0 +1,23 @@
+CC=gcc
+INC_DIR = src
+SRC_DIR = src
+OBJ_DIR = Object
+CFLAGS  = -c -I. -Wall -Werror -Wextra -fopenmp
+
+
+SRCS = $(SRC_DIR)/conio.c $(SRC_DIR)/ghosts.c $(SRC_DIR)/movement.c $(SRC_DIR)/print.c $(SRC_DIR)/pacman.c $(SRC_DIR)/struct.c main.c
+OBJS = $(OBJ_DIR)/conio.o $(OBJ_DIR)/ghosts.o $(OBJ_DIR)/movement.o $(OBJ_DIR)/print.o $(OBJ_DIR)/pacman.o $(OBJ_DIR)/struct.o $(OBJ_DIR)/main.o
+# Note: The above will soon get unwieldy.
+# The wildcard and patsubt commands will come to your rescue.
+
+DEPS = $(INC_DIR)/struct.h
+# Note: The above will soon get unwieldy.
+# You will soon want to use an automatic dependency generator.
+
+
+all: $(OBJS)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/main.o: $(DEPS)
