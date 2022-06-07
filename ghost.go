@@ -5,19 +5,16 @@ import (
 	"time"
 )
 
-var maps []int
-
-type pos struct {
-	x int
-	y int
+type ghost struct {
+	x    int
+	y    int
+	past int
 }
 
-var ghosts []*pos
-
 func moveGhosts() {
-	for _, g := range ghosts {
+	for _, g := range Game.ghosts {
 		direction := findDirection()
-		g.x, g.y = Move(g.x, g.y, direction)
+		g.x, g.y = Move(g.x, g.y, direction, *g)
 		time.Sleep(800 * time.Millisecond)
 	}
 }
@@ -33,18 +30,18 @@ func findDirection() string {
 	return move[dir]
 }
 
-func Move(oldRow, oldCol int, dir string) (newRow, newCol int) {
-	newRow, newCol = oldRow, oldCol
+func Move(oldRow, oldCol int, dir string, g ghost) (newRow, newCol int) {
 
+	newRow, newCol = oldRow, oldCol
 	switch dir {
 	case "UP":
 		newRow = newRow - 1
 		if newRow < 0 {
-			newRow = len(maps) - 1
+			newRow = len(Game.maps) - 1
 		}
 	case "DOWN":
 		newRow = newRow + 1
-		if newRow == len(maps) {
+		if newRow == len(Game.maps) {
 			newRow = 0
 		}
 	case "RIGHT":
@@ -59,10 +56,13 @@ func Move(oldRow, oldCol int, dir string) (newRow, newCol int) {
 		}
 	}
 
-	if maps[newRow*19+newCol] == '2' {
+	if Game.maps[newRow*19+newCol] == '2' {
 		newRow = oldRow
 		newCol = oldCol
 	}
+
+	Game.maps[oldRow*19+oldCol] = g.past
+	g.past = Game.maps[newRow*19+newCol]
 
 	return
 }
