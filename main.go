@@ -40,23 +40,38 @@ func main() {
 
 	printMap(&game)
 
-	fmt.Print("aled")
-
-	go func() {
+	input := make(chan string)
+	go func(ch chan<- string) {
 		for {
-			makeMove(&game)
+			input, err := readInput()
+			if err != nil {
+				ch <- "ESC"
+			}
+			ch <- input
 		}
-	}()
+	}(input)
 
 	go func() {
 		for {
 			moveGhosts(&game)
+			time.Sleep(time.Second)
 		}
 	}()
 
 	go func() {
 		for {
-			game.maps[player.y*19+player.x] = 3
+			str := "ahag"
+			select {
+			case inp := <-input:
+				if inp == "ESC" {
+					game.pac.lives = 0
+				}
+				game.pac.dir = inp
+				str = inp
+				makeMove(&game)
+			default:
+			}
+			game.maps[game.pac.y*19+game.pac.x] = 3
 			changed := true
 			for i := 0; i < len(game.ghosts); i++ {
 				if !game.ghosts[i].changed {
@@ -68,7 +83,7 @@ func main() {
 
 			if changed {
 				printMap(&game)
-				fmt.Printf("Dir: %s\n", game.pac.dir)
+				fmt.Printf("Dir: %s\n", str)
 				time.Sleep(time.Second)
 			}
 		}
