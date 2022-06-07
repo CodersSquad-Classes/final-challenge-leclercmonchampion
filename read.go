@@ -6,10 +6,10 @@ import (
 	"strings"
 )
 
-func readMap(file string, map_ []int) error []int {
+func readMap(file string, map_ []int) ([]int, error) {
 	f, err := os.ReadFile(file)
 	if err != nil {
-		return err
+		return map_, err
 	}
 
 	lines := strings.Split(string(f), "\n")
@@ -18,12 +18,12 @@ func readMap(file string, map_ []int) error []int {
 		for j, n := range num {
 			intN, err := strconv.Atoi(n)
 			if err != nil {
-				return err
+				return map_, err
 			}
 			map_[i*19+j] = intN
 		}
 
 	}
 
-	return map_
+	return map_, nil
 }
