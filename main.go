@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
+	"os/exec"
 	"time"
 )
 
@@ -25,15 +28,29 @@ type Game struct {
 	score  int
 }
 
+func initialise() {
+	cbTerm := exec.Command("stty", "cbreak", "-echo")
+	cbTerm.Stdin = os.Stdin
+
+	err := cbTerm.Run()
+	if err != nil {
+		log.Fatalln("unable to activate cbreak mode:", err)
+	}
+}
+
 func main() {
 	var player Pacman
 	var game Game
 	var maps [399]int
 	var err error
+
 	player = Pacman{9, 15, 3, "<", false}
 	ghosts := []Ghost{Ghost{9, 9, 0, false}}
 	game = Game{player, ghosts, maps, 0}
 	game.maps, err = readMap("map.txt", game.maps)
+
+	initialise()
+
 	if err != nil {
 		panic(err)
 	}
@@ -45,6 +62,7 @@ func main() {
 		for {
 			input, err := readInput()
 			if err != nil {
+				log.Print("error reading input:", err)
 				ch <- "ESC"
 			}
 			ch <- input
@@ -58,38 +76,33 @@ func main() {
 		}
 	}()
 
-	go func() {
-		for {
-			str := "ahag"
-			select {
-			case inp := <-input:
-				if inp == "ESC" {
-					game.pac.lives = 0
-				}
-				game.pac.dir = inp
-				str = inp
-				makeMove(&game)
-			default:
+	for game.pac.lives != 0 {
+		str := "ahag"
+		select {
+		case inp := <-input:
+			if inp == "ESC" {
+				game.pac.lives = 0
+				break
 			}
-			game.maps[game.pac.y*19+game.pac.x] = 3
-			changed := true
-			for i := 0; i < len(game.ghosts); i++ {
-				if !game.ghosts[i].changed {
-					changed = false
-					break
-				}
-				game.maps[game.ghosts[i].y*19+game.ghosts[i].x] = i + 4
+			game.pac.dir = inp
+			str = inp
+			makeMove(&game)
+		default:
+		}
+		game.maps[game.pac.y*19+game.pac.x] = 3
+		changed := true
+		for i := 0; i < len(game.ghosts); i++ {
+			if !game.ghosts[i].changed {
+				changed = false
+				break
 			}
-
-			if changed {
-				printMap(&game)
-				fmt.Printf("Dir: %s\n", str)
-				time.Sleep(time.Second)
-			}
+			game.maps[game.ghosts[i].y*19+game.ghosts[i].x] = i + 4
 		}
 
-	}()
-	for game.pac.lives != 0 {
-
+		if changed {
+			printMap(&game)
+			fmt.Printf("Dir: %s\n", str)
+			time.Sleep(time.Second)
+		}
 	}
 }

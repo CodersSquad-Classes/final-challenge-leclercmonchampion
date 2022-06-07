@@ -18,13 +18,13 @@ func readInput() (string, error) {
 	} else if cnt >= 3 {
 		if buffer[0] == 0x1b && buffer[1] == '[' {
 			switch buffer[2] {
-			case 'W':
+			case 'w':
 				return "v", nil // Up
-			case 'S':
+			case 's':
 				return "^", nil // Down
-			case 'D':
+			case 'd':
 				return "<", nil // Right
-			case 'Q':
+			case 'q':
 				return ">", nil // Left
 			}
 		}
