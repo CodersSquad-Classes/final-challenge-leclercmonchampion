@@ -97,6 +97,6 @@ func printMap(g *Game) {
 	fmt.Print("\n")
 	}
 
-	fmt.Print(game.score)//this show an error message be
+	fmt.Print(g.score)//this show an error message be
 
 }
