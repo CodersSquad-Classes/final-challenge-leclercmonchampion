@@ -49,10 +49,14 @@ func makeMove(game *Game) {
 	case "v":
 		if map_[(player.y-1)*19+player.x] != 2 {
 			player.y--
+
 			if player.y < 0 {
 				player.y = 20
 			}
 			changed = true
+			if map_[(player.y-1)*19+player.x] == 1 {
+				game.score += 10
+			}
 		}
 
 	case "^":
@@ -62,6 +66,9 @@ func makeMove(game *Game) {
 				player.y = 0
 			}
 			changed = true
+			if map_[(player.y+1)*19+player.x] == 1 {
+				game.score += 10
+			}
 		}
 
 	case "<":
@@ -71,6 +78,9 @@ func makeMove(game *Game) {
 				player.x = 0
 			}
 			changed = true
+			if map_[player.y*19+player.x+1] == 1 {
+				game.score += 10
+			}
 		}
 
 	case ">":
@@ -80,6 +90,9 @@ func makeMove(game *Game) {
 				player.x = 20
 			}
 			changed = true
+			if map_[player.y*19+player.x-1] == 1 {
+				game.score += 10
+			}
 		}
 
 	}
