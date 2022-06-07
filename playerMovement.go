@@ -24,13 +24,13 @@ func readInput() (string, error) {
 		if buffer[0] == 0x1b && buffer[1] == '[' {
 			switch buffer[2] {
 			case 'W':
-				return "U", nil // Up
+				return "v", nil // Up
 			case 'S':
-				return "D", nil // Down
+				return "^", nil // Down
 			case 'D':
-				return "R", nil // Right
+				return "<", nil // Right
 			case 'Q':
-				return "L", nil // Left
+				return ">", nil // Left
 			}
 		}
 	}
@@ -41,7 +41,7 @@ func readInput() (string, error) {
 func makeMove(player *pacman, map_ []int) {
 
 	switch player.dir {
-	case "U":
+	case "v":
 		if map_[player.y*19+player.x] != 2 {
 			player.y--
 			if player.y < 0 {
@@ -49,7 +49,7 @@ func makeMove(player *pacman, map_ []int) {
 			}
 		}
 
-	case "D":
+	case "^":
 		if map_[player.y*19+player.x] != 2 {
 			player.y++
 			if player.y > 20 {
@@ -57,7 +57,7 @@ func makeMove(player *pacman, map_ []int) {
 			}
 		}
 
-	case "R":
+	case "<":
 		if map_[player.y*19+player.x] != 2 {
 			player.x++
 			if player.x > 20 {
@@ -65,7 +65,7 @@ func makeMove(player *pacman, map_ []int) {
 			}
 		}
 
-	case "L":
+	case ">":
 		if map_[player.y*19+player.x] != 2 {
 			player.x--
 			if player.x < 0 {
