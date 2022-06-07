@@ -5,19 +5,13 @@ import (
 	"time"
 )
 
-type ghost struct {
-	x    int
-	y    int
-	past int
-}
-
-func moveGhosts() {
-	var game Game
-	for _, g := range game.ghosts {
+func moveGhosts(game *Game) {
+	for i := 0; i < len(game.ghosts); i++ {
 		direction := findDirection()
-		g.x, g.y = Move(g.x, g.y, direction, *g, game)
-		time.Sleep(800 * time.Millisecond)
+		game.ghosts[i].x, game.ghosts[i].y = Move(direction, &game.ghosts[i], game)
+		game.ghosts[i].changed = true
 	}
+	time.Sleep(time.Second)
 }
 
 func findDirection() string {
@@ -31,39 +25,40 @@ func findDirection() string {
 	return move[dir]
 }
 
-func Move(oldRow, oldCol int, dir string, g ghost, game Game) (newRow, newCol int) {
-
-	newRow, newCol = oldRow, oldCol
+func Move(dir string, ghost *Ghost, game *Game) (newRow, newCol int) {
+	new_x, new_y := ghost.x, ghost.y
 	switch dir {
 	case "UP":
-		newRow = newRow - 1
-		if newRow < 0 {
-			newRow = len(game.maps) - 1
+		if game.maps[(ghost.y-1)*19+ghost.x] != 2 {
+			new_y--
+			if new_y < 0 {
+				newRow = 20
+			}
 		}
 	case "DOWN":
-		newRow = newRow + 1
-		if newRow == len(game.maps) {
-			newRow = 0
+		if game.maps[(ghost.y+1)*19+ghost.x] != 2 {
+			new_y++
+			if new_y > 20 {
+				newRow = 0
+			}
 		}
 	case "RIGHT":
-		newCol = newCol + 1
-		if newCol == 19 {
-			newCol = 0
+		if game.maps[ghost.y*19+ghost.x+1] != 2 {
+			new_x++
+			if new_x < 0 {
+				newCol = 18
+			}
 		}
 	case "LEFT":
-		newCol = newCol - 1
-		if newCol < 0 {
-			newCol = 19 - 1
+		if game.maps[ghost.y*19+ghost.x-1] != 2 {
+			new_x--
+			if new_x > 18 {
+				newCol = 0
+			}
 		}
 	}
+	game.maps[ghost.y*19+ghost.x] = ghost.past
+	ghost.past = game.maps[new_y*19+new_x]
 
-	if game.maps[newRow*19+newCol] == '2' {
-		newRow = oldRow
-		newCol = oldCol
-	}
-
-	game.maps[oldRow*19+oldCol] = g.past
-	g.past = game.maps[newRow*19+newCol]
-
-	return
+	return new_x, new_y
 }

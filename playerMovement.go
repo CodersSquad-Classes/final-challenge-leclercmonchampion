@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 )
 
@@ -35,14 +36,13 @@ func readInput() (string, error) {
 func makeMove(game *Game) {
 
 	var player *Pacman
-	var map_ [399]int
+	var map_ *[399]int
 
 	player = &game.pac
-	map_ = game.maps
-
+	map_ = &game.maps
 	switch player.dir {
 	case "v":
-		if map_[player.y*19+player.x] != 2 {
+		if map_[(player.y-1)*19+player.x] != 2 {
 			player.y--
 			if player.y < 0 {
 				player.y = 20
@@ -50,7 +50,7 @@ func makeMove(game *Game) {
 		}
 
 	case "^":
-		if map_[player.y*19+player.x] != 2 {
+		if map_[(player.y+1)*19+player.x] != 2 {
 			player.y++
 			if player.y > 20 {
 				player.y = 0
@@ -58,7 +58,8 @@ func makeMove(game *Game) {
 		}
 
 	case "<":
-		if map_[player.y*19+player.x] != 2 {
+		if map_[player.y*19+player.x+1] != 2 {
+			fmt.Println("aled ptn c'est de la merde")
 			player.x++
 			if player.x > 20 {
 				player.x = 0
@@ -66,7 +67,7 @@ func makeMove(game *Game) {
 		}
 
 	case ">":
-		if map_[player.y*19+player.x] != 2 {
+		if map_[player.y*19+player.x-1] != 2 {
 			player.x--
 			if player.x < 0 {
 				player.x = 20
@@ -74,6 +75,4 @@ func makeMove(game *Game) {
 		}
 
 	}
-
-	return
 }

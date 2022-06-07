@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/exec"
 )
 
 func printMap(g *Game) {
@@ -17,8 +19,9 @@ func printMap(g *Game) {
 	player = g.pac
 	map_ = g.maps
 
-	fmt.Print("aled ptn")
-	fmt.Println("\033[2J\033[1;1H")
+	cmd := exec.Command("clear")
+	cmd.Stdout = os.Stdout
+	cmd.Run()
 	for i := 0; i < 21; i++ {
 		for j := 0; j < 19; j++ {
 			neighbor = [4]int{0, 0, 0, 0}
@@ -64,20 +67,24 @@ func printMap(g *Game) {
 				}
 			case 3:
 				fmt.Print("\x1b[33;1m")
-				fmt.Print(player.dir)
+				fmt.Print(" " + player.dir + " ")
 			case 4:
-				fmt.Print("n")
+				fmt.Print("\x1b[33;1m")
+				fmt.Print(" n ")
 			case 5:
-				fmt.Print("n")
+				fmt.Print("\x1b[33;1m")
+				fmt.Print(" n ")
 			case 6:
-				fmt.Print("n")
+				fmt.Print("\x1b[33;1m")
+				fmt.Print(" n ")
 			case 7:
-				fmt.Print("n")
+				fmt.Print("\x1b[33;1m")
+				fmt.Print(" n ")
 			default:
 				fmt.Print("Error inf matrix format")
 			}
 		}
-		fmt.Print("\n")
+		fmt.Println()
 	}
-	fmt.Print(score)
+	fmt.Printf("\x1b[0mScore: %d\n", score)
 }
