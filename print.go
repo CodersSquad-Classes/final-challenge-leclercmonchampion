@@ -17,8 +17,8 @@ func printMap(g *Game) {
 	player = g.pac
 	map_ = g.maps
 
+	fmt.Print("aled ptn")
 	fmt.Println("\033[2J\033[1;1H")
-	fmt.Print("b")
 	for i := 0; i < 21; i++ {
 		for j := 0; j < 19; j++ {
 			neighbor = [4]int{0, 0, 0, 0}

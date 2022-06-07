@@ -26,10 +26,10 @@ func main() {
 		panic(err)
 	}
 
+	fmt.Print("\n z")
 	printMap(&game)
-	fmt.Print("b")
 
-	movements := make(chan string)
+	/*movements := make(chan string)
 	go func(ch chan<- string) {
 		fmt.Print("c")
 		for {
@@ -37,6 +37,6 @@ func main() {
 			readInput()
 			makeMove(&game)
 		}
-	}(movements)
+	}(movements)*/
 
 }
