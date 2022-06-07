@@ -27,7 +27,9 @@ func printMap(g *Game) {
 
 	var player Pacman
 	var maps []int
-	var neighbors [4]int 
+	var neighbor [4]int 
+
+	game.score := 0
 
 	player := g.pac
 	maps := g.maps
@@ -94,5 +96,7 @@ func printMap(g *Game) {
 		}
 	fmt.Print("\n")
 	}
-	fmt.Print(game.score)
+
+	fmt.Print(game.score)//this show an error message be
+
 }
