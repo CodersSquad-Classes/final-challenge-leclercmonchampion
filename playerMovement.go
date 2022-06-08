@@ -5,34 +5,6 @@ import (
 	"time"
 )
 
-func readInput() (string, error) {
-	buffer := make([]byte, 100)
-
-	cnt, err := os.Stdin.Read(buffer)
-	if err != nil {
-		return "", err
-	}
-
-	if cnt == 1 && buffer[0] == 0x1b {
-		return "ESC", nil
-	} else if cnt >= 3 {
-		if buffer[0] == 0x1b && buffer[1] == '[' {
-			switch buffer[2] {
-			case 'w':
-				return "v", nil // Up
-			case 's':
-				return "^", nil // Down
-			case 'd':
-				return "<", nil // Right
-			case 'q':
-				return ">", nil // Left
-			}
-		}
-	}
-
-	return "", nil
-}
-
 func makeMove(game *Game) {
 
 	var player *Pacman
