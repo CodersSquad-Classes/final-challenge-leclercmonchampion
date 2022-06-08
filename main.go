@@ -38,6 +38,7 @@ func main() {
 	var err error
 	var ghostsQuantity int
 	var ghosts []Ghost
+	game.pac.coins = countCoins(maps)
 
 	keyboard := keylogger.FindKeyboardDevice()
 
@@ -50,7 +51,7 @@ func main() {
 	fmt.Printf("Choose ghosts number between 1 and 4: ")
 	fmt.Scanf("%d", &ghostsQuantity)
 
-	player = Pacman{9, 15, 3, "<", false, countCoins(maps)}
+	player = Pacman{9, 15, 3, "<", false, game.pac.coins}
 	for i := 0; i < ghostsQuantity; i++ {
 		ghosts = append(ghosts, Ghost{ghostsCoord[i][0], ghostsCoord[i][1], 0, false})
 	}
@@ -93,6 +94,7 @@ func main() {
 				if ghost.x == game.pac.x && ghost.y == game.pac.y {
 					game.pac.x = 9
 					game.pac.y = 15
+					ghost.past = 0
 
 					for i := 0; i < ghostsQuantity; i++ {
 						ghosts = append(ghosts, Ghost{ghostsCoord[i][0], ghostsCoord[i][1], 0, false})
