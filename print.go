@@ -13,6 +13,7 @@ func printMap(g *Game) {
 	var neighbor [4]int
 
 	score := g.score
+	coins := g.pac.coins
 
 	player = g.pac
 	map_ = g.maps
@@ -86,5 +87,5 @@ func printMap(g *Game) {
 	}
 	fmt.Printf("\x1b[0mScore: %d\n", score)
 	fmt.Printf("\x1b[0mLives: %d\n", g.pac.lives)
-	fmt.Printf("\x1b[0mCoins: %d\n", g.pac.coins)
+	fmt.Printf("\x1b[0mCoins: %d\n", coins)
 }
