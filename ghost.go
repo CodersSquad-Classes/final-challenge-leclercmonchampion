@@ -9,6 +9,7 @@ func moveGhosts(game *Game) {
 	for i := 0; i < len(game.ghosts); i++ {
 		direction := findDirection()
 		game.ghosts[i].x, game.ghosts[i].y = Move(direction, &game.ghosts[i], game)
+		game.maps[game.ghosts[i].y*19+game.ghosts[i].x] = i + 4
 		game.ghosts[i].changed = true
 	}
 	time.Sleep(time.Second)
@@ -29,28 +30,28 @@ func Move(dir string, ghost *Ghost, game *Game) (newRow, newCol int) {
 	new_x, new_y := ghost.x, ghost.y
 	switch dir {
 	case "UP":
-		if game.maps[(ghost.y-1)*19+ghost.x] != 2&game.maps[(ghost.y-1)*19+ghost.x] < 4 {
+		if game.maps[(ghost.y-1)*19+ghost.x] != 2 && game.maps[(ghost.y-1)*19+ghost.x] < 4 {
 			new_y--
 			if new_y < 0 {
 				newRow = 20
 			}
 		}
 	case "DOWN":
-		if game.maps[(ghost.y+1)*19+ghost.x] != 2&game.maps[(ghost.y+1)*19+ghost.x] < 4 {
+		if game.maps[(ghost.y+1)*19+ghost.x] != 2 && game.maps[(ghost.y+1)*19+ghost.x] < 4 {
 			new_y++
 			if new_y > 20 {
 				newRow = 0
 			}
 		}
 	case "RIGHT":
-		if game.maps[ghost.y*19+ghost.x+1] != 2&game.maps[ghost.y*19+ghost.x+1] < 4 {
+		if game.maps[ghost.y*19+ghost.x+1] != 2 && game.maps[ghost.y*19+ghost.x+1] < 4 {
 			new_x++
 			if new_x < 0 {
 				newCol = 18
 			}
 		}
 	case "LEFT":
-		if game.maps[ghost.y*19+ghost.x-1] != 2&game.maps[ghost.y*19+ghost.x-1] < 4 {
+		if game.maps[ghost.y*19+ghost.x-1] != 2 && game.maps[ghost.y*19+ghost.x-1] < 4 {
 			new_x--
 			if new_x > 18 {
 				newCol = 0
