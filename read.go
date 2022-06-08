@@ -6,8 +6,9 @@ import (
 	"strings"
 )
 
-func readMap(file string, map_ [399]int) ([399]int, error) {
+func readMap(file string, map_ [399]int, game *Game) ([399]int, error) {
 	f, err := os.ReadFile(file)
+
 	if err != nil {
 		return map_, err
 	}
@@ -20,20 +21,12 @@ func readMap(file string, map_ [399]int) ([399]int, error) {
 			if err != nil {
 				return map_, err
 			}
+			if intN == 1 {
+				game.coins++
+			}
 			map_[i*19+j] = intN
 		}
 	}
 
 	return map_, nil
-}
-
-// func that count the numbers of coins
-func countCoins(map_ [399]int) int {
-	coins := 0
-	for _, n := range map_ {
-		if n == 1 {
-			coins++
-		}
-	}
-	return coins
 }

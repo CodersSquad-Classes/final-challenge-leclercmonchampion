@@ -54,10 +54,6 @@ func makeMove(game *Game) {
 				player.y = 20
 			}
 			changed = true
-			if map_[(player.y-1)*19+player.x] == 1 {
-				game.score += 10
-				game.pac.coins--
-			}
 		}
 
 	case "^":
@@ -67,10 +63,6 @@ func makeMove(game *Game) {
 				player.y = 0
 			}
 			changed = true
-			if map_[(player.y+1)*19+player.x] == 1 {
-				game.score += 10
-				game.pac.coins--
-			}
 		}
 
 	case "<":
@@ -80,10 +72,6 @@ func makeMove(game *Game) {
 				player.x = 0
 			}
 			changed = true
-			if map_[player.y*19+player.x+1] == 1 {
-				game.score += 10
-				game.pac.coins--
-			}
 		}
 
 	case ">":
@@ -93,10 +81,6 @@ func makeMove(game *Game) {
 				player.x = 20
 			}
 			changed = true
-			if map_[player.y*19+player.x-1] == 1 {
-				game.score += 10
-				game.pac.coins--
-			}
 		}
 
 	}
@@ -104,9 +88,13 @@ func makeMove(game *Game) {
 	if changed {
 		map_[y*19+x] = 0
 	}
+	if map_[player.y*19+player.x] == 1 {
+		game.score += 10
+		game.coins--
+	}
 
 	// check is coins are over
-	if game.pac.coins == 0 {
+	if game.coins == 1 {
 		print("You win!")
 		os.Exit(0)
 	}

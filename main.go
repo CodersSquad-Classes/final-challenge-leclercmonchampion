@@ -13,7 +13,6 @@ type Pacman struct {
 	lives   int
 	dir     string
 	changed bool
-	coins   int
 }
 
 type Ghost struct {
@@ -27,6 +26,7 @@ type Game struct {
 	ghosts []Ghost
 	maps   [399]int
 	score  int
+	coins  int
 }
 
 var ghostsCoord = [][]int{{9, 8}, {9, 9}, {9, 10}, {7, 9}}
@@ -38,7 +38,6 @@ func main() {
 	var err error
 	var ghostsQuantity int
 	var ghosts []Ghost
-	game.pac.coins = countCoins(maps)
 
 	keyboard := keylogger.FindKeyboardDevice()
 
@@ -51,12 +50,12 @@ func main() {
 	fmt.Printf("Choose ghosts number between 1 and 4: ")
 	fmt.Scanf("%d", &ghostsQuantity)
 
-	player = Pacman{9, 15, 3, "<", false, game.pac.coins}
+	player = Pacman{9, 15, 3, "<", false}
 	for i := 0; i < ghostsQuantity; i++ {
 		ghosts = append(ghosts, Ghost{ghostsCoord[i][0], ghostsCoord[i][1], 0, false})
 	}
-	game = Game{player, ghosts, maps, 0}
-	game.maps, err = readMap("map.txt", game.maps)
+	game = Game{player, ghosts, maps, 0, 0}
+	game.maps, err = readMap("map.txt", game.maps, &game)
 
 	if err != nil {
 		panic(err)
@@ -82,22 +81,19 @@ func main() {
 
 	go func() {
 		for {
-			makeMove(&game)
-		}
-	}()
-
-	go func() {
-		for {
 			moveGhosts(&game)
 			time.Sleep(time.Second)
 			for _, ghost := range game.ghosts {
 				if ghost.x == game.pac.x && ghost.y == game.pac.y {
 					game.pac.x = 9
 					game.pac.y = 15
-					//ghost.past = 0
 
 					for i := 0; i < ghostsQuantity; i++ {
-						ghosts = append(ghosts, Ghost{ghostsCoord[i][0], ghostsCoord[i][1], 0, false})
+						game.maps[ghosts[i].y*19+ghosts[i].x] = ghosts[i].past
+						ghosts[i].past = 0
+						ghosts[i].x = ghostsCoord[i][0]
+						ghosts[i].y = ghostsCoord[i][1]
+
 					}
 
 					game.pac.lives--
@@ -107,6 +103,12 @@ func main() {
 					}
 				}
 			}
+		}
+	}()
+
+	go func() {
+		for {
+			makeMove(&game)
 		}
 	}()
 
@@ -148,7 +150,6 @@ func main() {
 
 		if changed {
 			printMap(&game)
-			fmt.Printf("Dir: %s\n", str)
 			time.Sleep(time.Second)
 		}
 	}
