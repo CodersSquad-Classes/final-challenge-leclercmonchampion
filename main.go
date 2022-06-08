@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
-	"os/exec"
 	"time"
+
+	"github.com/MarinX/keylogger"
 )
 
 type Pacman struct {
@@ -28,28 +28,24 @@ type Game struct {
 	score  int
 }
 
-func initialise() {
-	cbTerm := exec.Command("stty", "cbreak", "-echo")
-	cbTerm.Stdin = os.Stdin
-
-	err := cbTerm.Run()
-	if err != nil {
-		log.Fatalln("unable to activate cbreak mode:", err)
-	}
-}
-
 func main() {
 	var player Pacman
 	var game Game
 	var maps [399]int
 	var err error
 
+	keyboard := keylogger.FindKeyboardDevice()
+
+	k, err := keylogger.New(keyboard)
+	if err != nil {
+		panic(err)
+	}
+	defer k.Close()
+
 	player = Pacman{9, 15, 3, "<", false}
 	ghosts := []Ghost{Ghost{9, 9, 0, false}}
 	game = Game{player, ghosts, maps, 0}
 	game.maps, err = readMap("map.txt", game.maps)
-
-	initialise()
 
 	if err != nil {
 		panic(err)
@@ -59,15 +55,25 @@ func main() {
 
 	input := make(chan string)
 	go func(ch chan<- string) {
-		for {
-			input, err := readInput()
-			if err != nil {
-				log.Print("error reading input:", err)
-				ch <- "ESC"
+		events := k.Read()
+		for e := range events {
+			switch e.Type {
+
+			case keylogger.EvKey:
+				if e.KeyPress() {
+					ch <- e.KeyString()
+				}
+				break
+
 			}
-			ch <- input
 		}
 	}(input)
+
+	go func() {
+		for {
+			makeMove(&game)
+		}
+	}()
 
 	go func() {
 		for {
@@ -86,16 +92,30 @@ func main() {
 	}()
 
 	for game.pac.lives != 0 {
-		str := "ahag"
+		str := "d"
 		select {
 		case inp := <-input:
 			if inp == "ESC" {
 				game.pac.lives = 0
 				break
 			}
-			game.pac.dir = inp
 			str = inp
-			makeMove(&game)
+			switch str {
+			case "W":
+				game.pac.dir = "v"
+				break
+			case "S":
+				game.pac.dir = "^"
+				break
+			case "D":
+				game.pac.dir = "<"
+				break
+			case "A":
+				game.pac.dir = ">"
+				break
+			default:
+				break
+			}
 		default:
 		}
 		game.maps[game.pac.y*19+game.pac.x] = 3
