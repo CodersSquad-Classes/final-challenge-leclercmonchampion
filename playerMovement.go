@@ -104,5 +104,12 @@ func makeMove(game *Game) {
 	if changed {
 		map_[y*19+x] = 0
 	}
+
+	// check is coins are over
+	if game.pac.coins == 0 {
+		print("You win!")
+		os.Exit(0)
+	}
+
 	time.Sleep(time.Second)
 }
