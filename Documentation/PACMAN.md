@@ -46,7 +46,7 @@ Choose ghosts number between 1 and 4:
 <font color='greenyellow'> How to play Pacman ? </font>
 ----------------------
 
-Following this, you will just have to take advantage of the Pacman, to move you will have to use the ZQSD keys
+Following this, you will just have to take advantage of the Pacman, to move you will have to use the WASD keys
 
 
 
