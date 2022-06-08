@@ -82,7 +82,7 @@ For the graphical interface we just plan to use the console and create an ASCII 
 In order to have a better representation of the map and the game for the user, we will use a color system to differentiate the walls, the Pacman, the ghosts and the points.
 - The Pacman will be represented with the following characters : <font color='yellow'> < </font> *(going to the right)*    <font color='yellow'> > </font> *(going to the left)*   <font color='yellow'> v </font> *(going up)*     <font color='yellow'> ^ </font> *(going down)* and will be in yellow.
 - The ghosts will be represented with the following character : <font color='purple'> n </font>   and will be in different color (not yellow)
-- The walls will be represented ...
+- The walls will be represented with " | " for the veertical, " - " for the horizontal and " + " for the corner
 - The points will be represented by classic points : <font color='yellow'> . </font>
 
 
