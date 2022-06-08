@@ -141,7 +141,6 @@ func main() {
 				changed = false
 				break
 			}
-			game.maps[game.ghosts[i].y*19+game.ghosts[i].x] = i + 4
 		}
 
 		if changed {
