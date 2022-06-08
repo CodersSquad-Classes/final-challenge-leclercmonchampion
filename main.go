@@ -94,7 +94,7 @@ func main() {
 				if ghost.x == game.pac.x && ghost.y == game.pac.y {
 					game.pac.x = 9
 					game.pac.y = 15
-					ghost.past = 0
+					//ghost.past = 0
 
 					for i := 0; i < ghostsQuantity; i++ {
 						ghosts = append(ghosts, Ghost{ghostsCoord[i][0], ghostsCoord[i][1], 0, false})
