@@ -29,7 +29,7 @@ type Game struct {
 	score  int
 }
 
-var ghostsCoord = [][]int{{9, 8}, {9, 9}, {9, 10}, {11, 9}}
+var ghostsCoord = [][]int{{9, 8}, {9, 9}, {9, 10}, {7, 9}}
 
 func main() {
 	var player Pacman
