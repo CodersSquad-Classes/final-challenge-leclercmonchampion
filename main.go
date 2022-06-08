@@ -13,6 +13,7 @@ type Pacman struct {
 	lives   int
 	dir     string
 	changed bool
+	coins   int
 }
 
 type Ghost struct {
@@ -28,7 +29,7 @@ type Game struct {
 	score  int
 }
 
-var ghostsCoord = [][]int{{9, 8}, {9, 9}, {9, 10}, {9, 11}}
+var ghostsCoord = [][]int{{9, 8}, {9, 9}, {9, 10}, {11, 9}}
 
 func main() {
 	var player Pacman
@@ -49,7 +50,7 @@ func main() {
 	fmt.Printf("Choose ghosts number between 1 and 4: ")
 	fmt.Scanf("%d", &ghostsQuantity)
 
-	player = Pacman{9, 15, 3, "<", false}
+	player = Pacman{9, 15, 3, "<", false, countCoins(maps)}
 	for i := 0; i < ghostsQuantity; i++ {
 		ghosts = append(ghosts, Ghost{ghostsCoord[i][0], ghostsCoord[i][1], 0, false})
 	}
@@ -93,10 +94,10 @@ func main() {
 					game.pac.x = 9
 					game.pac.y = 15
 
-					for i, _ := range game.ghosts {
-						game.ghosts[i].x = 9
-						game.ghosts[i].y = 9
+					for i := 0; i < ghostsQuantity; i++ {
+						ghosts = append(ghosts, Ghost{ghostsCoord[i][0], ghostsCoord[i][1], 0, false})
 					}
+
 					game.pac.lives--
 					if game.pac.lives == 0 {
 						os.Exit(0)

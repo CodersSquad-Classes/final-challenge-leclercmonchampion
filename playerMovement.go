@@ -56,6 +56,7 @@ func makeMove(game *Game) {
 			changed = true
 			if map_[(player.y-1)*19+player.x] == 1 {
 				game.score += 10
+				game.pac.coins--
 			}
 		}
 
@@ -68,6 +69,7 @@ func makeMove(game *Game) {
 			changed = true
 			if map_[(player.y+1)*19+player.x] == 1 {
 				game.score += 10
+				game.pac.coins--
 			}
 		}
 
@@ -80,6 +82,7 @@ func makeMove(game *Game) {
 			changed = true
 			if map_[player.y*19+player.x+1] == 1 {
 				game.score += 10
+				game.pac.coins--
 			}
 		}
 
@@ -92,6 +95,7 @@ func makeMove(game *Game) {
 			changed = true
 			if map_[player.y*19+player.x-1] == 1 {
 				game.score += 10
+				game.pac.coins--
 			}
 		}
 
