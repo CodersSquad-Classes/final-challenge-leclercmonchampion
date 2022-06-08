@@ -14,8 +14,6 @@ func printMap(g *Game) {
 
 	score := g.score
 
-	g.score = 0
-
 	player = g.pac
 	map_ = g.maps
 

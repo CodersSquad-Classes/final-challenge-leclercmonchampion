@@ -28,11 +28,15 @@ type Game struct {
 	score  int
 }
 
+var ghostsCoord = [][]int{{9, 8}, {9, 9}, {9, 10}, {9, 11}}
+
 func main() {
 	var player Pacman
 	var game Game
 	var maps [399]int
 	var err error
+	var ghostsQuantity int
+	var ghosts []Ghost
 
 	keyboard := keylogger.FindKeyboardDevice()
 
@@ -42,8 +46,13 @@ func main() {
 	}
 	defer k.Close()
 
+	fmt.Printf("Choose ghosts number between 1 and 4: ")
+	fmt.Scanf("%d", &ghostsQuantity)
+
 	player = Pacman{9, 15, 3, "<", false}
-	ghosts := []Ghost{Ghost{9, 9, 0, false}}
+	for i := 0; i < ghostsQuantity; i++ {
+		ghosts = append(ghosts, Ghost{ghostsCoord[i][0], ghostsCoord[i][1], 0, false})
+	}
 	game = Game{player, ghosts, maps, 0}
 	game.maps, err = readMap("map.txt", game.maps)
 
