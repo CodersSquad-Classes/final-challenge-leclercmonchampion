@@ -3,18 +3,18 @@
 
 This document will allow you to understand the developement and the decisions we made for this project, as well as the architecture of the project. 
 
-<font color='greenyellow'> Project Architecture : </font>
+<font color='greenyellow'> Project Structure : </font>
 ----------------------
 
 We decided to split the project into several code files in order to have a better vision of the project in its entirety as well as to have a better organization.
-We put all the supporting scripts in the src folder and left main.c in the global folder. As well as images and documentation in the Documentation folder.
+We put all the images and documentation in the Documentation folder.
 
 ### <font color='aqua'> Scripts </font>
-- main.c : This script is the center of our program. It links the different scripts and functions together in order to have a functional program. It also defines the basic structures and parameters of our ghosts and our pacman. It also allows to edit the matrix that manages our map.
-- movement.c : Allows to manage the movements of the Pacman, to recover the keys typed by the user in order to transcribe them in the game to direct the character.
-- ghost.c : Allows you to define the structure of ghosts. This also governs their random movement.
-- read.c : This script makes it possible to recover data from map.txt and transcribe them into a matrix which will then be used throughout the project.
-- print.c : This script displays the map and the score of the game from the matrix.
+- main.go : This script is the center of our program. It links the different scripts and functions together in order to have a functional program. It also defines the basic structures and parameters of our ghosts and our pacman. It also allows to edit the matrix that manages our map. (threads are defined in it)
+- playerMovement.go : Allows to manage the movements of the Pacman, to recover the keys typed by the user in order to transcribe them in the game to direct the character. 
+- ghost.go : handles everything related to moving ghosts.
+- read.go : This script makes it possible to recover data from map.txt and transcribe them into a matrix which will then be used throughout the project.
+- print.go : This script displays the map, the score, the number of lives remaining of the game from the matrix.
 
 ### <font color='aqua'> Documentation </font>
 - img : Folder that groups the photos used.
@@ -25,8 +25,55 @@ We put all the supporting scripts in the src folder and left main.c in the globa
 - maps.txt : Corresponds to the different maps of our game.
 
 ### <font color='aqua'> External scripts </font>
-- conio.h 
-- conio.c : Use to import the conio library which is normally reserved for windows users. This library makes it possible to detect the pressure of the keys to manage the movements.
+- go.mod
+- go.sum : scripts to integrate the github library into our project
+
+
+ <font color='greenyellow'> Structure of types </font>
+------------
+
+Pacman:
+- x,y int : corresponds to the position of the pacman. Starts at {9,15}
+- lives int : corresponds to the number of lives remaining in the pacman. Starts at 3
+- dir string : Corresponds to the current direction of the pacman. Start to the right
+- changed bool : Allows to check if pacman does not hit a wall, starts at False.
+- coins int : Corresponds to the number of coins remaining on the map, starts with the value retrieved by read.go
+
+Ghost:
+- x,y int : corresponds to the position of the ghost. Redifined in Game
+- past int : corresponds to the previous position of the ghost
+- changed bool : Allows to check if the ghost does not hit a wall, starts at False.
+
+Game:
+- pac Pacman : corresponds to a pacman object
+- ghosts []Ghost : corresponds to a list of ghosts (from 1 to 4, defined at the beginning)
+- maps [399]int : corresponds to the map retrieved in read.go
+- score int : corresponds to the score of the pacman, starts at 0.
+
+
+ <font color='greenyellow'> Activity Diagram : </font>
+------------
+![Activity Diagram](img/activity_diagram.png)
+
+ <font color='greenyellow'> Activity Diagram : </font>
+------------
+
+Pacman |
+----- |
+type Pacman struct {x,y,lives,dir,changed} |
+type Ghost struct {x,y,past,changed] |
+type Game struct {pac,ghosts,maps,score} |
+|
+ test |
+func moveGhosts(game *Game); |
+func findDirection() string;
+func Move(dir string, ghost *Ghost, game *Game) (newRow, newCol int); |
+func readInput() (string, error); |
+func makeMove(game *Game); |
+func printMap(g *Game); |
+func readMap(file string, map_ [399]int) ([399]int, error); |
+
+
 
 <font color='greenyellow'> Graphic Interface : </font>
 -------------------
@@ -39,10 +86,15 @@ In order to have a better representation of the map and the game for the user, w
 - The points will be represented by classic points : <font color='yellow'> . </font>
 
 
-
 <font color='greenyellow'> Map Management : </font>
 ----------------
   
+
+![Game](img/game.png)
+
+↑
+Corresponds to the our interface
+
 {{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},  
 &nbsp;{2,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2},  
 &nbsp;{2,1,2,2,1,2,2,2,1,2,1,2,2,2,1,2,2,1,2},  
@@ -65,7 +117,8 @@ In order to have a better representation of the map and the game for the user, w
 &nbsp;{2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2},  
 &nbsp;{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}}
 
-![Excelmap](img/excelmap.png) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ![Pacman](img/pacman.png) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+↑
+Corresponds to the [map.txt](../map.txt)
 
 Regarding the management of the map, we decided to represent it in the form of a matrix, as can be seen in the images above.
 We define each box with a specific value to define its state : 
@@ -75,20 +128,3 @@ We define each box with a specific value to define its state :
 - 2 corresponds to a wall
 - 3 corresponds to the Pacman
 - 4 corresponds to the ghosts
-
- <font color='greenyellow'> Ghosts </font>
-------
-
-Regarding how ghosts work, we decided to make them follow a random path. 
-On each tick they will move in a random direction and wait for the next tick. Obviously, they cannot cross the walls and removes a life from the Pacman if they cross paths.
-
-
-
-Test | Patate
------|-------
-Mouche | Petite mouche
-
-```c
-printf("je suis une mouche");
-int pierre = 0;
-```
