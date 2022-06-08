@@ -81,6 +81,13 @@ func main() {
 			time.Sleep(time.Second)
 			for _, ghost := range game.ghosts {
 				if ghost.x == game.pac.x && ghost.y == game.pac.y {
+					game.pac.x = 9
+					game.pac.y = 15
+
+					for i, _ := range game.ghosts {
+						game.ghosts[i].x = 9
+						game.ghosts[i].y = 9
+					}
 					game.pac.lives--
 					if game.pac.lives == 0 {
 						os.Exit(0)
